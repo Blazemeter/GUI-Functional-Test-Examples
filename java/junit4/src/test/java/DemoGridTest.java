@@ -6,8 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +20,8 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
 
 public class DemoGridTest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DemoGridTest.class);
 
     private final static String API_KEY = "";
     private final static String API_SECRET = "";
@@ -80,9 +86,22 @@ public class DemoGridTest {
         capabilities.setCapability("browserVersion", "69");
 
         driver = new RemoteWebDriver(url, capabilities);
+
+        String reportURL = String.format("https://%s/api/v4/grid/sessions/%s/redirect/to/report", BASE, driver.getSessionId());
+        System.out.println("Report url: " + reportURL);
+        openInBrowser(reportURL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
+    public static void openInBrowser(String string) {
+        if (java.awt.Desktop.isDesktopSupported()) {
+            try {
+                java.awt.Desktop.getDesktop().browse(new URI(string));
+            } catch (Exception ex) {
+                LOGGER.warn("Failed to open in browser", ex);
+            }
+        }
+    }
 
     @AfterClass
     public static void tearDown() {
