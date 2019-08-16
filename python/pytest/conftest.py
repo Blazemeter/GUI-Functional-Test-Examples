@@ -5,14 +5,11 @@ import pytest
 API_KEY = ''
 API_SECRET = ''
 base = 'a.blazemeter.com'
-harborid = ''
 
 
 ### BlazeGrid capabilites
 desired_capabilities = {
     'browserName': 'chrome',
-    'blazemeter.locationId': harborid,
-    'blazemeter.sessionName': 'Chrome',
 }
 
 
