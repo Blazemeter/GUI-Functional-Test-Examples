@@ -157,8 +157,8 @@ class TestGlobal(object):
 
     # Get current url
     def test_get_current_url(self, driver):
-        driver.current_url
+        driver.current_url()
 
     # Close window
-    def test_close_window(self, driver):
-        driver.close
+    # def test_close_window(self, driver):
+    #     driver.close()

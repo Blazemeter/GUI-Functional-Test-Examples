@@ -28,7 +28,7 @@ def name_reporter(request, driver):
         'testCaseName': request.node.name,
         'testSuiteName': request.fspath.purebasename
     }
-    driver.execute_script("/* BlazeGrid test-case-start */", args)
+    driver.execute_script("/* FLOW_MARKER test-case-start */", args)
     yield
     tests_failed = request.node.rep_call.failed or request.node.rep_setup.failed
     status = 'failed' if tests_failed else 'success'
@@ -36,7 +36,7 @@ def name_reporter(request, driver):
         'status': status,
         'message': 'test \{0}'.format(status)
     }
-    driver.execute_script("/* BlazeGrid test-case-stop */", args)
+    driver.execute_script("/* FLOW_MARKER test-case-stop */", args)
 
 
 @pytest.mark.tryfirst
