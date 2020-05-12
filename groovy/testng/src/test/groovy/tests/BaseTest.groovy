@@ -7,8 +7,8 @@ import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.remote.RemoteWebDriver
 import org.openqa.selenium.support.ui.FluentWait
 import org.openqa.selenium.support.ui.Wait
-import org.testng.annotations.AfterTest
-import org.testng.annotations.BeforeTest
+import org.testng.annotations.AfterMethod
+import org.testng.annotations.BeforeMethod
 import org.testng.annotations.Listeners
 
 import java.util.concurrent.TimeUnit
@@ -29,15 +29,18 @@ class BaseTest {
         WAITER.get()
     }
 
-    @BeforeTest()
+    @BeforeMethod()
     void setUpDriver() {
         DesiredCapabilities caps = new DesiredCapabilities()
         if (IS_REMOTE) {
-            String key = '2c1802d2ea62ebadf5de8f76'
-            String secret = 'c3733e470c6f6e5574a0211cb70dc29e042ac7f3ca4f2791a74a0e13f2a43588e1953ab5'
+            //your API_KEY, SECRET and PROJECT_ID for project with more than 2 parallel sessions allowed:
+            String key = ''
+            String secret = ''
+            String projectId = ''
             String hub = 'https://a.blazemeter.com/api/v4/grid/wd/hub'
             caps.setCapability('blazemeter.apiKey', key)
             caps.setCapability('blazemeter.apiSecret', secret)
+            caps.setCapability('blazemeter.projectId', projectId)
             caps.setCapability('browserName', 'chrome')
             caps.setCapability('browserVersion', '74')
             caps.setCapability('blazemeter.buildId', BUILD_ID)
@@ -54,7 +57,7 @@ class BaseTest {
         WAITER.set(wait)
     }
 
-    @AfterTest
+    @AfterMethod
     void tearDownDriver() {
         if (driver) {
             driver.quit()
