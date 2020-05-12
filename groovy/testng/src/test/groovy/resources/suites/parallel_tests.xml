@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Web acceptance test-suite" parallel="tests" thread-count="10">
-    <test name="Thread_1">
+<suite name="Web acceptance test-suite" parallel="methods" thread-count="10">
+    <test name="parallel">
         <classes>
             <class name="com.blazedemo.tests.SimpleTest"/>
-        </classes>
-    </test>
-    <test name="Thread_2">
-        <classes>
-            <class name="com.blazedemo.tests.ParametrizedTest"/>
         </classes>
     </test>
 </suite>
