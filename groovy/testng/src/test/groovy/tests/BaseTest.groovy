@@ -33,8 +33,8 @@ class BaseTest {
     void setUpDriver() {
         DesiredCapabilities caps = new DesiredCapabilities()
         if (IS_REMOTE) {
-            String key = '2c1802d2ea62ebadf5de8f76'
-            String secret = 'c3733e470c6f6e5574a0211cb70dc29e042ac7f3ca4f2791a74a0e13f2a43588e1953ab5'
+            String key = 'api_key'
+            String secret = 'api_secret'
             String hub = 'https://a.blazemeter.com/api/v4/grid/wd/hub'
             caps.setCapability('blazemeter.apiKey', key)
             caps.setCapability('blazemeter.apiSecret', secret)
