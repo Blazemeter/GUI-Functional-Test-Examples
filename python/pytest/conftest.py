@@ -30,8 +30,11 @@ def name_reporter(request, driver):
     }
     driver.execute_script("/* FLOW_MARKER test-case-start */", args)
     yield
-    tests_failed = request.node.rep_call.failed or request.node.rep_setup.failed
-    status = 'failed' if tests_failed else 'success'
+    if request.node.rep_call.failed or request.node.rep_setup.failed:
+        is_assertion = 'AssertionError' in request.node.rep_call.longrepr.reprcrash.message
+        status = 'failed' if is_assertion else 'broken'
+    else:
+        status = 'passed'
     args = {
         'status': status,
         'message': 'test \{0}'.format(status)
